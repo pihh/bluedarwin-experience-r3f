@@ -1,3 +1,4 @@
+import './styles.scss'
 import gsap from "gsap";
 
 
@@ -44,5 +45,29 @@ export const toggleVideoPanelAnnotation = function (
       console.warn(ex);
     }
   } else {
+    // const tlContent = gsap.timeline();
+
+    //   tlContent.from(selector + " .annotation-text-container div", 1.8, {
+    //     y: 100,
+    //     ease: "power4.out",
+    //     delay: 0.5,
+    //     skewY: 7,
+    //     stagger: {
+    //       amount: 0.75,
+    //     },
+    //   });
   }
 };
+
+
+export const Actions = function(props){
+  return (<>
+  <div id="actions-container">
+    <button onClick={props.onToggleCarlaIntro}prefix=''>Carla intro</button>
+    <button  onClick={props.onToggleChatbotAnnotation}>Chatbot intro</button>
+    <button >Ask for ID</button>
+    <button onClick={props.onNavigateToDocIntel}>Navigate to doc intel</button>
+    <button onClick={props.onToggleDocIntelAnnotation}>DocIntel intro</button>
+  </div>
+  </>)
+}

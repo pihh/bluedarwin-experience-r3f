@@ -8,7 +8,6 @@ import { ExperienceDebugger } from "./utils/degugger";
 
 import { CallToSubscribeFilmScript } from "./film-scripts/use-cases/CallToSubscribe";
 
-
 import { geometry } from "maath";
 import { VideoFrame } from "./components/VideoFrame/VideoFrame";
 import { Controls } from "./components/Controls/Controls";
@@ -18,14 +17,17 @@ import { Footer } from "./components/Footer/Footer";
 import { DocIntel } from "./components/DocIntel/DocIntel";
 import { Chatbot } from "./components/Chatbot/Chatbot";
 import { Ground } from "./components/Ground/Ground";
-import { toggleChatbotAnnotation, toggleDocIntelAnnotation } from "./components/Actions";
+import {
+  Actions,
+  toggleChatbotAnnotation,
+  toggleDocIntelAnnotation,
+} from "./components/Actions";
 import { Splash } from "./components/Splash/Splash";
 
 extend(geometry);
 
-let baseStory = 0
+let baseStory = 0;
 let storyConfig = CallToSubscribeFilmScript.stories[baseStory];
-
 
 function App() {
   const [transitioning, setTransitioning] = useState(false);
@@ -36,47 +38,53 @@ function App() {
   const [chatbotAnnotationShowing, setChatbotAnnotationShowing] =
     useState(true);
 
-
-  const onToggleChatbotAnnotation = function(){
-    toggleChatbotAnnotation(chatbotAnnotationShowing,setChatbotAnnotationShowing)
-  }
-  const onToggleDocIntelAnnotation = function(){
-    toggleDocIntelAnnotation(docIntelAnnotationShowing,setDocIntelAnnotationShowing)
-  }
+  const onToggleChatbotAnnotation = function () {
+    toggleChatbotAnnotation(
+      chatbotAnnotationShowing,
+      setChatbotAnnotationShowing
+    );
+  };
+  const onToggleDocIntelAnnotation = function () {
+    toggleDocIntelAnnotation(
+      docIntelAnnotationShowing,
+      setDocIntelAnnotationShowing
+    );
+  };
+  const onToggleCarlaIntro = function () {
+    setCarlaIntro(!carlaIntro);
+  };
 
   const navigateToScene0 = function () {
     navigateToScene(0);
     setCarlaIntro(false);
   };
-  const navigateToScene1 = function () {
+  const onNavigateToDocIntel = function () {
     navigateToScene(1);
-
   };
-  const closeAnnotations = function(){
-    toggleChatbotAnnotation(true,setChatbotAnnotationShowing)
-    toggleDocIntelAnnotation(true,setDocIntelAnnotationShowing)
-    setCarlaIntro(false)
-  }
+  const closeAnnotations = function () {
+    toggleChatbotAnnotation(true, setChatbotAnnotationShowing);
+    toggleDocIntelAnnotation(true, setDocIntelAnnotationShowing);
+    setCarlaIntro(false);
+  };
   const navigateToScene = function (index) {
     if (transitioning) return;
     if (story == index) return;
-    closeAnnotations()
+    closeAnnotations();
     setStory(index);
     setTransitioning(true);
-    
+
     storyConfig = CallToSubscribeFilmScript.stories[index];
   };
   const onCompleteTransition = function () {
     setTransitioning(false);
-  
-    if(story == 0){
-      setCarlaIntro(true);
-      toggleChatbotAnnotation(false,setChatbotAnnotationShowing)
-    }else if(story == 1){
-      setCarlaIntro(false);
-      toggleDocIntelAnnotation(false,setDocIntelAnnotationShowing)
-    }
 
+    if (story == 0) {
+      setCarlaIntro(true);
+      toggleChatbotAnnotation(false, setChatbotAnnotationShowing);
+    } else if (story == 1) {
+      setCarlaIntro(false);
+      toggleDocIntelAnnotation(false, setDocIntelAnnotationShowing);
+    }
   };
 
   return (
@@ -85,11 +93,12 @@ function App() {
         <Splash />
         <header id="app-header"></header>
         <main id="app-body">
-          {/* <div id="app-controls">
-            <button> Carla Arives</button>
-            <button> Carla Speach</button>
-            <button> Present chatbot</button>
-          </div> */}
+          <Actions
+            onToggleChatbotAnnotation={onToggleChatbotAnnotation}
+            onToggleDocIntelAnnotation={onToggleDocIntelAnnotation}
+            onToggleCarlaIntro={onToggleCarlaIntro}
+            onNavigateToDocIntel={onNavigateToDocIntel}
+          />
           <Canvas
             mode={"concurrent"}
             gl={{ alpha: false }}
@@ -119,9 +128,7 @@ function App() {
 
                 <Chatbot annotationShowing={chatbotAnnotationShowing} />
 
-                <DocIntel
-                  annotationShowing={docIntelAnnotationShowing}
-                />
+                <DocIntel annotationShowing={docIntelAnnotationShowing} />
 
                 <Ground />
               </group>
@@ -150,14 +157,11 @@ function App() {
             Show Doc Intel Annotation
           </button>
           <button onClick={navigateToScene0}>Scene 0</button>
-          <button onClick={navigateToScene1}>Scene 1</button>
+          <button onClick={onNavigateToDocIntel}>Scene 1</button>
         </footer>
       </div>
     </>
   );
 }
-
-
-
 
 export default App;
