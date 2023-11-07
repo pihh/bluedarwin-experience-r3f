@@ -106,6 +106,14 @@ button:focus-visible {
       .content {
         padding-top: 0.5em;
       }
+
+      ul {
+   
+        li {
+          direction: ltr;
+    
+        }
+      }
     }
     &.speaking {
       height: inherit;
@@ -164,6 +172,12 @@ button:focus-visible {
         height: 12px;
         color: lime !important;
       }
+      transition-delay: 0s;
+
+      &:nth-child(2){transition-delay: 0.1s;}
+      &:nth-child(3){transition-delay: 0.2s;}
+      &:nth-child(4){transition-delay: 0.3s;}
+      &:nth-child(5){transition-delay: 0.4s;}
     }
   }
 }
@@ -176,4 +190,19 @@ button:focus-visible {
 
 .thin {
   font-weight: 100;
+}
+
+.annotation-text-container{
+  transition-delay: 0s;
+
+  &:nth-child(2){transition-delay: 0.1s;}
+  &:nth-child(3){transition-delay: 0.2s;}
+  &:nth-child(4){transition-delay: 0.3s;}
+  &:nth-child(5){transition-delay: 0.4s;}
+}
+.text-stroke{
+  display: block;
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #fff;
 }

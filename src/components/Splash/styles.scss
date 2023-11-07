@@ -1,0 +1,19 @@
+#splash-screen{
+    height: 100dvh;
+    position: fixed;
+    width: 100dvw;
+    z-index: 10000;
+    background: black;
+    display:flex;
+    padding: 1em;
+    color: #5858f4;
+    align-items: center;
+    text-align: left;
+    opacity:1;
+    h1{
+        color: white;
+        font-weight: bolder;
+        text-transform: uppercase;
+    }
+    transition: all 2s ease-in-out;
+}
