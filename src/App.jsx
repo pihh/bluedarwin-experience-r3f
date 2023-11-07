@@ -180,6 +180,7 @@ function App() {
                   showAnnotation={chatbotAnnotationShowing}
                   name={"Cognus Chatbot"}
                   idx={"1"}
+                  src={"/textures/videos/bg.mp4"}
                 >
                   <div id="chatbot-annotation">
                     <p className="annotation-text-container thin">
@@ -203,6 +204,7 @@ function App() {
                   showAnnotation={docIntelAnnotationShowing}
                   name={"Doc Intel"}
                   idx={"2"}
+                  src={"/textures/videos/streams.mp4"}
                 >
                   <div id="doc-intel-annotation">
                     <p className="annotation-text-container thin">
@@ -239,23 +241,23 @@ function App() {
               </group>
 
               <Intro />
-              <ambientLight intensity={2} />
-              <spotLight position={[0, 5, 0]} intensity={40} />
+              <ambientLight intensity={0.5} />
+              <spotLight position={[0, 10, 0]} intensity={40} />
               <directionalLight position={[-50, 0, 40]} intensity={2} />
-              <ExperienceDebugger
+              {/* <ExperienceDebugger
                 config={{
                   camera: {
                     position: storyConfig.camera.position,
                     fov: storyConfig.camera.fov,
                   },
                 }}
-              />
+              /> */}
             </Suspense>
           </Canvas>
         </main>
 
         <Footer />
-        <footer id="app-footer">
+        <footer id="app-footer" style={{opacity:0}}>
           <button onClick={toggleChatbotAnnotation}>
             Show Chatbot Annotation
           </button>
