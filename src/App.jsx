@@ -9,7 +9,6 @@ import { ExperienceDebugger } from "./utils/degugger";
 import { CallToSubscribeFilmScript } from "./film-scripts/use-cases/CallToSubscribe";
 
 import { geometry } from "maath";
-import { VideoFrame } from "./components/VideoFrame/VideoFrame";
 import { Controls } from "./components/Controls/Controls";
 import { Carla } from "./components/Carla/Carla";
 import { Footer } from "./components/Footer/Footer";
@@ -23,6 +22,10 @@ import {
   toggleDocIntelAnnotation,
 } from "./components/Actions";
 import { Splash } from "./components/Splash/Splash";
+import { Panels } from "./components/Panels/Panels";
+import { useRef } from "react";
+import { PanelLine } from "./components/Panels/PanelLine";
+import { IdCard } from "./components/IdCard/IdCard";
 
 extend(geometry);
 
@@ -30,13 +33,21 @@ let baseStory = 0;
 let storyConfig = CallToSubscribeFilmScript.stories[baseStory];
 
 function App() {
+  const panelRef = useRef();
+  const [panelSide,setPanelSide] = useState('right')
+  const [idCardState,setIdCardState] = useState('hidden')
+
   const [transitioning, setTransitioning] = useState(false);
   const [story, setStory] = useState(baseStory);
-  const [carlaIntro, setCarlaIntro] = useState(true);
+  const [carlaIntro, setCarlaIntro] = useState(false);
   const [docIntelAnnotationShowing, setDocIntelAnnotationShowing] =
     useState(false);
   const [chatbotAnnotationShowing, setChatbotAnnotationShowing] =
-    useState(true);
+    useState(false);
+
+  const onTogglePanel = function () {
+    panelRef.current.togglePanel();
+  };
 
   const onToggleChatbotAnnotation = function () {
     toggleChatbotAnnotation(
@@ -54,7 +65,20 @@ function App() {
     setCarlaIntro(!carlaIntro);
   };
 
-  const navigateToScene0 = function () {
+  const onToggleIdCard = function () {
+    if(idCardState == "hidden"){
+      setIdCardState('intro')
+    }else if(idCardState == "intro"){
+      setIdCardState('transition-rotation')
+    }else if(idCardState == "transition-rotation"){
+      setIdCardState('rotation')
+    }else if(idCardState == "rotation"){
+      setIdCardState('hidden')
+    }
+    // setCarlaIntro(!carlaIntro);
+  };
+
+  const onNavigateToChatbot = function () {
     navigateToScene(0);
     setCarlaIntro(false);
   };
@@ -91,14 +115,32 @@ function App() {
     <>
       <div id="app-container">
         <Splash />
+        <Panels ref={panelRef} side={panelSide}>
+          
+            <h1>
+              <PanelLine>
+              Panel title
+              </PanelLine>
+            </h1>
+            <p>
+              <PanelLine>
+              Lorem ipsum dolor sit amet, consectetur adip
+              </PanelLine>
+            </p>
+          
+        </Panels>
         <header id="app-header"></header>
         <main id="app-body">
           <Actions
+          onToggleIdCard={onToggleIdCard}
             onToggleChatbotAnnotation={onToggleChatbotAnnotation}
+            onTogglePanel={onTogglePanel}
             onToggleDocIntelAnnotation={onToggleDocIntelAnnotation}
             onToggleCarlaIntro={onToggleCarlaIntro}
             onNavigateToDocIntel={onNavigateToDocIntel}
+            onNavigateToChatbot={onNavigateToChatbot}
           />
+
           <Canvas
             mode={"concurrent"}
             gl={{ alpha: false }}
@@ -108,7 +150,7 @@ function App() {
               fov: storyConfig.camera.fov,
             }}
           >
-            {/* <OrbitControls /> */}
+     
 
             <Controls
               transitioning={transitioning}
@@ -116,9 +158,11 @@ function App() {
               onCompleteTransition={onCompleteTransition}
             />
             <color attach="background" args={["black"]} />
-            <fog attach="fog" args={["black", 20, 40]} />
+            <fog attach="fog" args={["black", 20, 40]} />~
+
             <Suspense fallback={null}>
               <group position={[0, -2, 0]}>
+                <IdCard state={idCardState}/>
                 <Carla
                   rotation={[0, Math.PI - 1, 0]}
                   position={[-3, 0, 1]}
@@ -149,16 +193,7 @@ function App() {
         </main>
 
         <Footer />
-        <footer id="app-footer" style={{ opacity: 0.2 }}>
-          <button onClick={onToggleChatbotAnnotation}>
-            Show Chatbot Annotation
-          </button>
-          <button onClick={onToggleDocIntelAnnotation}>
-            Show Doc Intel Annotation
-          </button>
-          <button onClick={navigateToScene0}>Scene 0</button>
-          <button onClick={onNavigateToDocIntel}>Scene 1</button>
-        </footer>
+
       </div>
     </>
   );

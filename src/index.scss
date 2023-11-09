@@ -71,120 +71,6 @@ button:focus-visible {
 
 @import "./components/styles.scss";
 
-.annotation {
-  position: relative;
-  // height: 0px;
-  // width: 0px;
-  background-color: transparent;
-  opacity: 0;
-  transition: opacity 2s;
-  img {
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
-  }
-  &.annotation-visible {
-    opacity: 1;
-    img {
-      opacity: 1;
-    }
-  }
-  .annotation-inner {
-    // position: absolute;
-    // background-color: white;
-    border-radius: 0.6em;
-    padding: 1em 1.2em;
-    top: 0;
-    left: 0;
-    display: flex;
-
-    width: 25em;
-    text-align: right;
-    font-size: small;
-    color: white;
-    height: 220px;
-    &.content-right {
-      text-align: left;
-      .content {
-        padding-top: 0.5em;
-      }
-
-      ul {
-   
-        li {
-          direction: ltr;
-    
-        }
-      }
-    }
-    &.speaking {
-      height: inherit;
-      padding: 1em;
-    }
-    .carla-speaking {
-      text-align: center;
-      background-color: white;
-      color: black;
-      border-radius: 1em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1.25em 1em 1.75em 1em;
-      font-weight: 400;
-    }
-    .content {
-      display: flex;
-      flex-direction: column;
-      min-width: 250px;
-    }
-    .label {
-      width: 3em;
-      max-width: 55px;
-      margin-right: -3em;
-      transform: rotate(180deg);
-      &.label-right {
-        transform: rotate(0deg);
-        margin-right: 0em;
-      }
-    }
-  }
-}
-
-.annotation-text-container {
-  position: relative;
-  overflow: hidden;
-  // height: 100%;
-  min-width: fit-content;
-  // div{
-  //   position: absolute;
-
-  // }
-  ul {
-    margin-top: 1em;
-    li {
-      direction: rtl;
-
-      display: flex;
-      gap: 1em;
-      font-size: smaller;
-      align-items: center;
-      font-weight: 100;
-      .svg-icon--check-squared {
-        height: 12px;
-        color: lime !important;
-      }
-      transition-delay: 0s;
-
-      &:nth-child(2){transition-delay: 0.1s;}
-      &:nth-child(3){transition-delay: 0.2s;}
-      &:nth-child(4){transition-delay: 0.3s;}
-      &:nth-child(5){transition-delay: 0.4s;}
-    }
-  }
-}
-.annotation-text-container--proxy {
-  opacity: 0;
-}
 .bold {
   font-weight: bold;
 }
@@ -193,17 +79,34 @@ button:focus-visible {
   font-weight: 100;
 }
 
-.annotation-text-container{
-  transition-delay: 0s;
-
-  &:nth-child(2){transition-delay: 0.1s;}
-  &:nth-child(3){transition-delay: 0.2s;}
-  &:nth-child(4){transition-delay: 0.3s;}
-  &:nth-child(5){transition-delay: 0.4s;}
-}
-.text-stroke{
+.text-stroke {
   display: block;
   color: transparent;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #fff;
 }
+
+.opacity-0 {
+  opacity: 0 !important;
+}
+
+.display-none {
+  display: none !important;
+}
+
+
+.opened {
+  .wrapper{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+ 
+ 
+}
+.wrapper {
+  opacity: 0;
+  transform: translateY(10px);
+  display: inline-block;
+ 
+}
+

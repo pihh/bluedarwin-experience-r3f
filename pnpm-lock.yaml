@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@cyriacbr/react-split-text':
+    specifier: ^1.0.0
+    version: 1.0.0(react@18.2.0)
   '@react-three/drei':
     specifier: ^9.88.11
     version: 9.88.11(@react-three/fiber@8.15.9)(@types/three@0.158.1)(react-dom@18.2.0)(react@18.2.0)(three@0.158.0)
@@ -305,6 +308,15 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
     dev: true
+
+  /@cyriacbr/react-split-text@1.0.0(react@18.2.0):
+    resolution: {integrity: sha512-WkD88+LjOx1vWVI0hh6flUtnplGnxL7zE1SYFbEFfG0gvAJ3SERwtBqtQV8NoOKNd2dZr/GrfK0sBh460IvtHQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@esbuild/android-arm64@0.18.20:
     resolution: {integrity: sha512-Nz4rJcchGDtENV0eMKUNa6L12zz2zBDXuhj/Vjh18zGqB44Bi7MBMSXjgunJgjRhCmKOjnPuZp4Mb6OKqtMHLQ==}

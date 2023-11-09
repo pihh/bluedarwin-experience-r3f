@@ -1,0 +1,131 @@
+#bde-panels {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  width: 100dvw;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // pointer-events: none;
+  &.bde-panels--showing{
+    
+    z-index: 100000000;
+  }
+  .bde-panel-left {
+    .bde-panel-separator {
+      opacity: 0;
+    }
+  }
+  &.bde-panels--left {
+    .bde-panel {
+      &.bde-panel-right {
+        // pointer-events: none;
+      }
+      &.bde-panel-left {
+        background: white;
+        max-width: 40vw;
+        // pointer-events: auto;
+        transition: all 0.4s;
+        opacity: 0;
+        transform: translateX(-50vw);
+        transition-delay: 400ms;
+        .bde-panel-separator {
+          margin-left: 20.25em;
+          transform: rotateY(180deg);
+          opacity: 1;
+        }
+        &.open {
+          opacity: 1;
+          transform: translateX(-10vw);
+          transition-delay: 0ms;
+          .bde-panel-container {
+            opacity: 1;
+            transition-delay: 400ms;
+          }
+        }
+      }
+    }
+  }
+  .bde-panel {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    &.bde-panel-left {
+      // pointer-events: none;
+    }
+    &.bde-panel-right {
+      background: white;
+      max-width: 40vw;
+      // pointer-events: auto;
+      transition: all 0.4s;
+      opacity: 0;
+      transform: translateX(50vw);
+      transition-delay: 400ms;
+
+      &.open {
+        opacity: 1;
+        transform: translateX(0);
+        transition-delay: 0ms;
+        .bde-panel-container {
+          opacity: 1;
+          transition-delay: 400ms;
+        }
+      }
+    }
+    .bde-panel-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: all 0.4s;
+      height: -webkit-fill-available;
+      transition-delay: 0ms;
+
+      padding: 4em;
+    }
+  }
+}
+
+.translate-x-1\/2 {
+  --transform-translate-x: 50%;
+}
+
+.transform {
+  --transform-translate-x: 0;
+  --transform-translate-y: 0;
+  --transform-rotate: 0;
+  --transform-skew-x: 0;
+  --transform-skew-y: 0;
+  --transform-scale-x: 1;
+  --transform-scale-y: 1;
+  transform: translateX(var(--transform-translate-x))
+    translateY(var(--transform-translate-y)) rotate(var(--transform-rotate))
+    skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y))
+    scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+}
+.w-48 {
+  width: 12rem;
+}
+
+.right-0 {
+  right: 0;
+}
+.left-0 {
+  left: 0;
+}
+.inset-y-0 {
+  top: 0;
+  bottom: 0;
+}
+.absolute {
+  position: absolute;
+}
+.h-full {
+  height: 100%;
+}
+.bde-panel-separator {
+  margin-left: -6em;
+}

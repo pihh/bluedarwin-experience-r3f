@@ -31,7 +31,7 @@ export const Controls = function(props) {
     if (props.transitioning) {
       lookAt = new Vector3(lookAtX, lookAtY, lookAtZ);
     }
-  
+    camera.target = lookAt;
     useFrame(() => {
       if (props.transitioning) {
         const currPos = cameraRef.current.position;
@@ -68,8 +68,10 @@ export const Controls = function(props) {
         );
   
         cameraRef.current.lookAt(lookAt.x, lookAt.y, lookAt.z);
+        camera.target = lookAt
         let hasCompletedTransitioning = true;
         const currentLookAt = Object.values(lookAt);
+      
         const targetLookAt = Object.values(
           CallToSubscribeFilmScript.stories[props.story].camera.target
         );
@@ -79,6 +81,7 @@ export const Controls = function(props) {
           }
         }
         if (hasCompletedTransitioning) {
+     
           // camera.position.copy(cameraRef.current.position)
           // camera.lookAt(lookAt.x, lookAt.y, lookAt.z)
           setLookAtX(
@@ -91,6 +94,8 @@ export const Controls = function(props) {
             CallToSubscribeFilmScript.stories[props.story].camera.target.z
           );
         //   console.log({ camera, cameraRef });
+         camera.target = CallToSubscribeFilmScript.stories[props.story].camera.target
+        //cameraRef.current.lookAt(lookAt.x, lookAt.y, lookAt.z);
           props.onCompleteTransition();
         }
       }
@@ -104,7 +109,7 @@ export const Controls = function(props) {
           camera={camera}
           onChange={() => {
             // console.log("onChange");
-            console.log(cameraRef.current.position);
+            // console.log(cameraRef.current.position);
           }}
         />
       </>

@@ -1,7 +1,10 @@
+import './styles.scss';
 import { Html, Text } from "@react-three/drei";
 import { useState } from "react";
 import { useEffect } from "react";
 import * as THREE from "three";
+import { VideoFrameAnnotation } from './VideoFrameAnnotation';
+
 
 export const VideoFrame = function (props) {
   const id = props.idx ? "0"+props.idx : "01"
@@ -21,18 +24,19 @@ export const VideoFrame = function (props) {
       muted: true,
     })
   );
-  const annotationPosition = {
-    x: annotationAnchorX == "left"? -6.8 + annotationPositionAdjustment[0]:5.8 + annotationPositionAdjustment[0],
-    y: annotationAnchorX == "left"? 0 + annotationPositionAdjustment[1]: 0 + annotationPositionAdjustment[1],
-    z: annotationAnchorX == "left"?  0 + annotationPositionAdjustment[2]: 0 + annotationPositionAdjustment[2],
-  }
+  const visible = props.invisible? false: true
+  // const annotationPosition = {
+  //   x: annotationAnchorX == "left"? -6.8 + annotationPositionAdjustment[0]:5.8 + annotationPositionAdjustment[0],
+  //   y: annotationAnchorX == "left"? 0 + annotationPositionAdjustment[1]: 0 + annotationPositionAdjustment[1],
+  //   z: annotationAnchorX == "left"?  0 + annotationPositionAdjustment[2]: 0 + annotationPositionAdjustment[2],
+  // }
 
   useEffect(() => void video.play(), [video]);
 
   const fontMedium = "/fonts/Inter/Inter-Medium.woff"
   const fontRegular = "/fonts/Inter/Inter-Regular.woff"
   return (
-    <group {...props}>
+    <group {...props} visible={visible}>
 
      <Text font={fontMedium} color="white" fontSize={0.25} letterSpacing={-0.025} anchorY="top" anchorX="left" lineHeight={0.8} position={[-0.375, 0.715, 0.01]}>
         {/* {name} */}
@@ -58,7 +62,15 @@ export const VideoFrame = function (props) {
         <meshBasicMaterial color={"black"} attach="material" />
       </mesh>
 
-      <Html
+      <VideoFrameAnnotation
+        showAnnotation={props.showAnnotation}
+        annotationAnchorX={annotationAnchorX}
+        annotationPositionAdjustment={annotationPositionAdjustment}
+      >
+        {props.children}
+      </VideoFrameAnnotation>
+
+      {/* <Html
         transform
         geometry={<planeGeometry args={[5.4, 3, 32, 32]} />}
         position={[
@@ -81,7 +93,7 @@ export const VideoFrame = function (props) {
            
           </div>
         </div>
-      </Html>
+      </Html> */}
     
     </group>
   );
