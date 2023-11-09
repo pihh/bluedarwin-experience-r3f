@@ -59,6 +59,10 @@
         justify-content: center;
         padding: 1.25em 1em 1.75em 1em;
         font-weight: 400;
+        img{
+          width: 4em;
+          // margin-bottom: 1em;
+        }
       }
       .content {
         display: flex;

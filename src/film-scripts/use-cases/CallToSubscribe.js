@@ -22,16 +22,43 @@ const Story = [
 export const CallToSubscribeFilmScript = {
   stories: [
     {
+      idx: 0,
       name: Story[0],
+      description: "Carla arrives",
       camera: { position: { x: -16, y: 4, z: 18}, fov: 15, target:{x:0,y:0,z:0} },
       // camera: { position: { x: 18, y: 0, z: 12}, fov: 15, target:{x:0,y:0,z:0} },
       // camera: { position: { x: 16, y: 8, z: 20}, fov: 15, target:{x:0,y:0,z:0} },
       // camera: { position: { x: 16, y: 3, z: 20}, fov: 15, target:{x:0,y:0,z:0} },
     },
     {
-      name: Story[1],
+      idx: 5,
+      description: "Carla throws ID to Doc Intel and navigates to docIntel",
+      name: Story[5],
       // camera: { position: { x: 20.0, y: 1, z: 18 }, fov: 15, target:{x:15,y:0,z:0} },
       camera: { position: { x: 9.0, y: 1, z: 16 }, fov: 15, target:{x:15,y:0,z:0} },
+    },
+    {
+      idx: 7,
+      name: Story[7],
+      description: "Navigate to meanwhile",
+      // camera: { position: { x: 20.0, y: 1, z: 18 }, fov: 15, target:{x:15,y:0,z:0} },
+      //camera: { position: { x: 14.0, y: 0, z: -10 }, fov: 15, target:{x:-25,y:0,z:-40} },
+      camera: { position: { x: 14.0, y: 0, z: -10 }, fov: 15, target:{x:-10,y:0,z:-15} },
+    },
+    {
+      idx: 8,
+      name: Story[8],
+      // camera: { position: { x: 20.0, y: 1, z: 18 }, fov: 15, target:{x:15,y:0,z:0} },
+      // camera: { position: { x: 30, y: 3, z: -32 }, fov: 15, target:{x:10,y:0,z:-35} },
+      // camera: { position: { x: 1, y: 4, z: -32 }, fov: 15, target:{x:-25,y:0,z:-40} },
+      // camera: { position: { x: -46.0, y: 1, z: -45 }, fov: 15, target:{x:-25,y:0,z:-40} },
+      camera: { position: { x: 3.0, y: 1, z: -32 }, fov: 15, target:{x:-25,y:0,z:-40} },
+    },
+    {
+      idx: 9,
+      name: Story[9],
+      // camera: { position: { x: 20.0, y: 1, z: 18 }, fov: 15, target:{x:15,y:0,z:0} },
+      camera: { position: { x: 14, y: 1, z: -9 }, fov: 15, target:{x:-3,y:0,z:1} },
     },
   ],
 };

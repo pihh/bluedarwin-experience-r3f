@@ -43,7 +43,6 @@ export const toggleVideoPanelAnnotation = function (
       console.warn(ex);
     }
   } else {
-
     gsap.to(selector + " .annotation-text-container", {
       y: -10,
       opacity: 0,
@@ -52,7 +51,6 @@ export const toggleVideoPanelAnnotation = function (
       skewY: 0,
       stagger: -0.15,
     });
-
   }
 };
 
@@ -63,23 +61,38 @@ export const Actions = function (props) {
         <button onClick={props.onTogglePanel} prefix="">
           Toggle Panel
         </button>
+        <br />
+        <button onClick={props.onToggleIdCard}>Ask for ID</button>
+
+        <br />
+
         <button onClick={props.onToggleCarlaIntro} prefix="">
           Carla intro
         </button>
-        <button onClick={props.onToggleIdCard}>Ask for ID</button>
+        <button onClick={props.onToggleCarlaEmail} prefix="">
+          Carla Email
+        </button>
+        <button onClick={props.onToggleCarlaHeart} prefix="">
+          Carla Love
+        </button>
+        <br />
 
-        <br/>
         <button onClick={props.onToggleChatbotAnnotation}>Chatbot intro</button>
         <button onClick={props.onToggleDocIntelAnnotation}>
           DocIntel intro
         </button>
-        <br/>
+        <br />
+        <button onClick={props.onNavigateToChatbot}>Navigate to Chatbot</button>
         <button onClick={props.onNavigateToDocIntel}>
           Navigate to DocIntel
         </button>
-        <button onClick={props.onNavigateToChatbot}>
-          Navigate to Chatbot
+        <button onClick={props.onNavigateToMeanWhile}>
+          Navigate to Meanwhile
         </button>
+        <button onClick={props.onNavigateToAutomations}>
+          Navigate to Automations
+        </button>
+        <button onClick={props.onNavigateToCarla}>Navigate to Carla</button>
       </div>
     </>
   );

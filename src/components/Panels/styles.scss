@@ -13,6 +13,9 @@
     
     z-index: 100000000;
   }
+  .bde-panel-separator {
+    color:white;
+  }
   .bde-panel-left {
     .bde-panel-separator {
       opacity: 0;
@@ -52,6 +55,7 @@
     height: 100%;
     width: 100%;
     position: relative;
+    text-align: left;
     &.bde-panel-left {
       // pointer-events: none;
     }
@@ -84,7 +88,10 @@
       height: -webkit-fill-available;
       transition-delay: 0ms;
 
-      padding: 4em;
+      padding: 2em;
+      &>div{
+        width: -webkit-fill-available;
+      }
     }
   }
 }

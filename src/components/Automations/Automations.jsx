@@ -2,16 +2,18 @@ import { CheckIcon } from "../Icons/CheckIcon";
 import { VideoFrame } from "../VideoFrame/VideoFrame";
 
 export const Automations = function (props) {
-  const annotationShowing = props.annotationShowing;
+  const annotationShowing = true //props.annotationShowing;
   return (
     <VideoFrame
-      position={[20, 1.8, -6]}
-      rotation={[0, -Math.PI / 2 + 0.4, 0]}
-      annotationPositionAdjustment={[0.8, 0, 0]}
+      position={[-25, 1.8, -40]}
+      rotation={[0, Math.PI / 2 - 0.9, 0]}
+       annotationPositionAdjustment={[1.2, 0, 0]}
+      
       showAnnotation={annotationShowing}
-      name={"Doc Intel"}
-      idx={"2"}
-      src={"/textures/videos/streams.mp4"}
+      name={"Bluedarwin Automations"}
+      idx={"3"}
+      src={"/textures/videos/bg.mp4"}
+   
     >
       <div id="automations-annotation">
         <p className="annotation-text-container thin">

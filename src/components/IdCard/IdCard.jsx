@@ -28,15 +28,12 @@ function setOpacity( obj, opacity ) {
 
 export const IdCard = function (props) {
 
-    const setStateRotation = function(){
-        setState('transition-rotation')
-    }
+
   const state = props.state || "hidden"
   const ref = useRef();
   const meshRef = useRef();
-  //const [state, setState] = useState(props.state || currentState); // intro / transition-rotation/ rotating / visible
+  //const [state, setState] = useState(props.state || currentState); // intro / transition-rotation/ rotating / ending / hidden
 
-// setState(props.state || "hidden");
   const initialPosition = [0, 0, -1];
   const initialRotation = [0, -0.65, 0];
 
@@ -51,6 +48,9 @@ export const IdCard = function (props) {
     y: 0.5,
     z: 0.5,
   };
+  const ending = {
+    y: -3
+  }
 
   const positionToCamera = function (t, ref, initial =false) {
     const lookAt = t.camera.target
@@ -92,8 +92,12 @@ export const IdCard = function (props) {
     //     //setState("rotation");
     //   }
     }
-    if (state == "rotation") {
+    else if (state == "rotation") {
       meshRef.current.rotation.z += 0.5;
+    }else if(state == "ending"){
+      meshRef.current.rotation.z += 0.5;
+      meshRef.current.position.y = lerp(meshRef.current.position.y, ending.y, 0.1);
+      setOpacity(ref.current,0)
     }
   });
   return (
