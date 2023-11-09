@@ -30,6 +30,8 @@ export const PanelRight = forwardRef((props, ref) => {
   const [open, setOpen] = useState(false);
   const [opening, setOpening] = useState(false);
   const [opened, setOpened] = useState(false);
+
+  
   const onOpenPanel = function () {
     
     return new Promise((res,rej)=>{

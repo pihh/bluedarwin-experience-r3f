@@ -29,6 +29,8 @@ import { IdCard } from "./components/IdCard/IdCard";
 import { Meanwhile } from "./components/Meanwhile/Meanwhile";
 import { Automations } from "./components/Automations/Automations";
 import { wait } from "./utils/wait";
+import { Streams } from "./components/Streams/Streams";
+import { StreamsPunchline } from "./components/StreamsPunchline/StreamsPunchline";
 
 extend(geometry);
 
@@ -49,11 +51,16 @@ function App() {
   const [carlaEmail, setCarlaEmail] = useState(false);
   const [carlaHeart, setCarlaHeart] = useState(false);
 
+  const [streamsActive, setStreamsActive] = useState(false);
+  const [streamsTransitioning, setStreamsTransitioning] = useState(false);
+
   const [chatbotAnnotationShowing, setChatbotAnnotationShowing] =
     useState(false);
   const [docIntelAnnotationShowing, setDocIntelAnnotationShowing] =
     useState(false);
   const [automationsAnnotationShowing, setAutomationsAnnotationShowing] =
+    useState(false);
+  const [streamsAnnotationShowing, setStreamAnnotationShowing] =
     useState(false);
 
   // PANEL MANAGEMENT
@@ -68,46 +75,64 @@ function App() {
     setCarlaIntro(false);
   };
 
-  const onToggleChatbotAnnotation = function () {
+  const onToggleChatbotAnnotation = function (action=0) {
+    let annotationState = chatbotAnnotationShowing
+    if(action == -1){
+      annotationState = true
+    }
+    if(action == 1){
+      annotationState = false
+    }
     toggleChatbotAnnotation(
-      chatbotAnnotationShowing,
+      annotationState,
       setChatbotAnnotationShowing
     );
   };
-  const onToggleDocIntelAnnotation = function () {
+  const onToggleDocIntelAnnotation = function (action=0) {
+    let annotationState = docIntelAnnotationShowing
+    if(action == -1){
+      annotationState = true
+    }
+    if(action == 1){
+      annotationState = false
+    }
     toggleDocIntelAnnotation(
-      docIntelAnnotationShowing,
+      annotationState,
       setDocIntelAnnotationShowing
     );
   };
 
-  const onCloseCarlaAnnotations = async function(){
+  const onCloseCarlaAnnotations = async function () {
     let timeout = 0;
-    for(let annotation of [[carlaIntro,setCarlaIntro],[carlaEmail,setCarlaEmail],[carlaHeart,setCarlaHeart]]){
-      if(annotation[0]){
-        timeout = 100; 
-        annotation[1](false)
+    for (let annotation of [
+      [carlaIntro, setCarlaIntro],
+      [carlaEmail, setCarlaEmail],
+      [carlaHeart, setCarlaHeart],
+    ]) {
+      if (annotation[0]) {
+        timeout = 100;
+        annotation[1](false);
       }
     }
-    return await wait(timeout)
-  }
+    return await wait(timeout);
+  };
   const onToggleCarlaIntro = async function () {
-    let action = !carlaIntro
+    let action = !carlaIntro;
 
-    await onCloseCarlaAnnotations()
-    
+    await onCloseCarlaAnnotations();
+
     setCarlaIntro(action);
   };
   const onToggleCarlaEmail = async function () {
-    let action = !carlaEmail
+    let action = !carlaEmail;
 
-    await onCloseCarlaAnnotations()
+    await onCloseCarlaAnnotations();
     setCarlaEmail(action);
   };
   const onToggleCarlaHeart = async function () {
-    let action = !carlaHeart
+    let action = !carlaHeart;
 
-    await onCloseCarlaAnnotations()
+    await onCloseCarlaAnnotations();
     setCarlaHeart(action);
   };
 
@@ -117,8 +142,8 @@ function App() {
     } else if (idCardState == "intro") {
       setIdCardState("transition-rotation");
     } else if (idCardState == "transition-rotation") {
-      setIdCardState("rotation");
-    } else if (idCardState == "rotation") {
+      setIdCardState("rotating");
+    } else if (idCardState == "rotating") {
       setIdCardState("ending");
     } else if (idCardState == "ending") {
       setIdCardState("hidden");
@@ -139,14 +164,30 @@ function App() {
   };
   const onNavigateToAutomations = function () {
     navigateToScene(3);
+    wait(1000, ()=>{
+      setAutomationsAnnotationShowing(true)
+    })
   };
   const onNavigateToCarla = function () {
+    setAutomationsAnnotationShowing(false)
     navigateToScene(4);
+  };
+  const onNavigateToStreamsPunchline = function () {
+    navigateToScene(5);
+  };
+  const onNavigateToStreams = function () {
+    if (transitioning) return;
+    if (story == 6) return;
+    // treamsActive(true)
+    setStreamsTransitioning(true);
+    navigateToScene(6);
   };
 
   const navigateToScene = function (index) {
+   
     if (transitioning) return;
     if (story == index) return;
+  
     closeAnnotations();
     setStory(index);
     setTransitioning(true);
@@ -155,21 +196,90 @@ function App() {
   };
 
   const onCompleteTransition = function () {
+    console.log('onCompleteTransition',transitioning);
+    
     setTransitioning(false);
-
-    if (story == 0) {
-      setCarlaIntro(true);
-      toggleChatbotAnnotation(false, setChatbotAnnotationShowing);
-    } else if (story == 1) {
-      setCarlaIntro(false);
-      toggleDocIntelAnnotation(false, setDocIntelAnnotationShowing);
-    }
+    // debugger;
   };
 
+  // Storyline
+  const onCarlaArrive = function () {
+    // setCarlaIntro(true);
+    console.log("@todo");
+  };
+  const onCarlaStateIntention = function () {
+    setCarlaIntro(true);
+  };
+  const onIntroduceCognusChatbot = function () {
+    setCarlaIntro(false);
+    setChatbotAnnotationShowing(true);
+  };
+  const onAskId = function () {
+    // setCarlaIntro(false)
+    setChatbotAnnotationShowing(false);
+    console.log("@todo");
+  };
+  const onShowId = async function () {
+    // setCarlaIntro(false)
+    setChatbotAnnotationShowing(false);
+    setIdCardState("intro");
+    await wait(500);
+    setIdCardState("transition-rotation");
+    await wait(500);
+    setIdCardState("rotating");
+  };
+  const onThrowId = async function () {
+    // setCarlaIntro(false)
+    onNavigateToDocIntel();
+    await wait(2000);
+    
+    setIdCardState("ending");
+    
+    await wait(1000);
+
+  
+    setIdCardState("hidden");
+  };
+
+  const onPresentDocIntel = function () {
+    onToggleDocIntelAnnotation(1)
+  };
+  const onProcessDocument = function () {
+    // setDocIntelAnnotationShowing(false);
+    onToggleDocIntelAnnotation(-1)
+  };
+
+  const onCarlaRecieveEmail = function () {
+    setCarlaEmail(true);
+  };
+  const onCarlaShowLove = async function () {
+    setCarlaEmail(false);
+    await wait(1000);
+    setCarlaHeart(true);
+  };
+  const onPresentStreams = async function () {
+    setStreamsActive(true);
+    setStreamAnnotationShowing(true)
+    setCarlaHeart(false);
+  };
+
+  const onNavigateToEnd = function(){
+      console.log('@todo')
+  }
+  const onPresentProjectInfo = function(){
+    console.log('@todo')
+  }
+
+  useEffect(() => {
+  }, []);
+  const onSplashClose = function(){
+
+    panelRef.current.openPanel()
+  }
   return (
     <>
       <div id="app-container">
-        <Splash />
+        <Splash onSplashClose={onSplashClose}/> 
         <Panels ref={panelRef} side={panelSide}>
           <div className="text-left">
             <h1 className="bold">
@@ -222,6 +332,21 @@ function App() {
         <header id="app-header"></header>
         <main id="app-body">
           <Actions
+            onCarlaArrive={onCarlaArrive}
+            onCarlaStateIntention={onCarlaStateIntention}
+            onIntroduceCognusChatbot={onIntroduceCognusChatbot}
+            onAskId={onAskId}
+            onShowId={onShowId}
+            onThrowId={onThrowId}
+            onPresentDocIntel={onPresentDocIntel}
+            onProcessDocument={onProcessDocument}
+            onCarlaRecieveEmail={onCarlaRecieveEmail}
+            onCarlaShowLove={onCarlaShowLove}
+            onPresentStreams={onPresentStreams}
+            onNavigateToEnd={onNavigateToEnd}
+onPresentProjectInfo={onPresentProjectInfo}
+
+            
             onToggleIdCard={onToggleIdCard}
             onToggleChatbotAnnotation={onToggleChatbotAnnotation}
             onTogglePanel={onTogglePanel}
@@ -234,6 +359,8 @@ function App() {
             onNavigateToMeanWhile={onNavigateToMeanWhile}
             onNavigateToAutomations={onNavigateToAutomations}
             onNavigateToCarla={onNavigateToCarla}
+            onNavigateToStreamsPunchline={onNavigateToStreamsPunchline}
+            onNavigateToStreams={onNavigateToStreams}
           />
 
           <Canvas
@@ -251,7 +378,7 @@ function App() {
               onCompleteTransition={onCompleteTransition}
             />
             <color attach="background" args={["black"]} />
-            <fog attach="fog" args={["black", 20, 40]} />
+             <fog attach="fog" args={["black", 20, 50]} /> 
             <Suspense fallback={null}>
               <group position={[0, -2, 0]}>
                 <IdCard state={idCardState} />
@@ -267,23 +394,32 @@ function App() {
                 <Chatbot annotationShowing={chatbotAnnotationShowing} />
 
                 <DocIntel annotationShowing={docIntelAnnotationShowing} />
-                <Automations annotationShowing={automationsAnnotationShowing} />
 
                 <Meanwhile />
+
+                <Automations annotationShowing={automationsAnnotationShowing} />
+
+                <StreamsPunchline />
+                <Streams
+                  transitioning={streamsTransitioning}
+                  active={streamsActive}
+                  annotationShowing={streamsAnnotationShowing}
+                />
+
                 <Ground />
               </group>
 
               <ambientLight intensity={0.5} />
               <spotLight position={[0, 10, 0]} intensity={40} />
               <directionalLight position={[-50, 0, 40]} intensity={2} />
-              <ExperienceDebugger
+              {/* <ExperienceDebugger
                 config={{
                   camera: {
                     position: storyConfig.camera.position,
                     fov: storyConfig.camera.fov,
                   },
                 }}
-              />
+              /> */}
             </Suspense>
           </Canvas>
         </main>

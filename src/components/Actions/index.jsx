@@ -1,3 +1,4 @@
+import { CallToSubscribeFilmScript } from "../../film-scripts/use-cases/CallToSubscribe";
 import "./styles.scss";
 import gsap from "gsap";
 
@@ -54,7 +55,22 @@ export const toggleVideoPanelAnnotation = function (
   }
 };
 
-export const Actions = function (props) {
+const FilmScriptContainer = function(props){
+  return (
+    <>
+      <div id="film-script-actions-container">
+        {CallToSubscribeFilmScript.acts.map((el,i)=> {
+          return (
+            <button key={`film-script-action--${i}`} onClick={props[el.action]}>#{i} {el.name}</button>
+          )
+        })}
+
+      </div>
+    </>
+  )
+}
+
+const ActionsContainer = function(props){
   return (
     <>
       <div id="actions-container">
@@ -93,7 +109,18 @@ export const Actions = function (props) {
           Navigate to Automations
         </button>
         <button onClick={props.onNavigateToCarla}>Navigate to Carla</button>
+        <button onClick={props.onNavigateToStreamsPunchline}>Navigate to streams punchline</button>
+        <button onClick={props.onNavigateToStreams}>Navigate to streams</button>
       </div>
+    </>
+  );
+}
+
+export const Actions = function (props) {
+  return (
+    <>
+      <ActionsContainer {...props} />
+      <FilmScriptContainer {...props} />
     </>
   );
 };

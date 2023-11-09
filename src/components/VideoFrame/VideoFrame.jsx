@@ -25,6 +25,7 @@ export const VideoFrame = function (props) {
     })
   );
   const visible = props.invisible? false: true
+  
   // const annotationPosition = {
   //   x: annotationAnchorX == "left"? -6.8 + annotationPositionAdjustment[0]:5.8 + annotationPositionAdjustment[0],
   //   y: annotationAnchorX == "left"? 0 + annotationPositionAdjustment[1]: 0 + annotationPositionAdjustment[1],

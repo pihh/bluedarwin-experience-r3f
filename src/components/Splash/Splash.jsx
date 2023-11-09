@@ -3,15 +3,19 @@ import "./styles.scss";
 import { useState } from "react";
 import { wait } from "../../utils/wait";
 
-export const Splash = function () {
+export const Splash = function (props) {
   const [opacity, setOpacity] = useState(true);
   const [display, setDisplay] = useState(true);
   useEffect(() => {
 
     wait(1000,()=>{
         setOpacity(false)
-        wait(2000,()=>{
+        wait(750, ()=>{
+          props.onSplashClose()
+        })
+        wait(1500,()=>{
             setDisplay(false)
+            
         })
     })
   }, []);

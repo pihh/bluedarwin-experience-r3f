@@ -82,7 +82,7 @@ export const PanelLeft = forwardRef((props, ref) => {
     >
       <PanelSeparator />
       <div className="bde-panel-container">
-        <div>{props.children}</div>
+        {/* <div>{props.children}</div> */}
       </div>
     </div>
   );

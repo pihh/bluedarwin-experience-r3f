@@ -2,7 +2,7 @@ import { CheckIcon } from "../Icons/CheckIcon";
 import { VideoFrame } from "../VideoFrame/VideoFrame";
 
 export const Automations = function (props) {
-  const annotationShowing = true //props.annotationShowing;
+  const annotationShowing = props.annotationShowing;
   return (
     <VideoFrame
       position={[-25, 1.8, -40]}

@@ -17,6 +17,9 @@ export const Panels = forwardRef((props, ref) => {
     return side == "left" ? leftPanelRef : rightPanelRef;
   };
   useImperativeHandle(ref, () => ({
+    getPanelState(){
+      return getPanelRef().current.getPanelState();
+    },
     togglePanel() {
       const isOpen = getPanelRef().current.getPanelState();
       if (!isOpen) {
@@ -25,6 +28,7 @@ export const Panels = forwardRef((props, ref) => {
       getPanelRef().current.togglePanel();
     },
     openPanel() {
+      const isOpen = getPanelRef().current.getPanelState();
       if (!isOpen) {
         setOpen(true);
       }
