@@ -36,7 +36,7 @@ export const Carla = function (props) {
           className={`annotation ${
             props.showAnnotation ? "annotation-visible" : "annotation-hiden"
           }`}
-          onClick={() => console.log(".")}
+          
           onTransitionEnd={(e) => {
             handleTransitionEnd(e);
           }}
@@ -55,10 +55,10 @@ export const Carla = function (props) {
         {...props}
         transform
         geometry={<planeGeometry args={[3.66, 3.47]} />}
-        position-x={props.position[0] + 1.9}
-        position-y={props.position[1] + 1.5}
+        position-x={props.position[0] + 3}
+        position-y={props.position[1] + 2}
         position-z={props.position[2] - 0.5}
-        rotation={[0, -0.6, 0]}
+        rotation={[0, 2.2, 0]}
       >
         <div
           className={`annotation ${
@@ -66,7 +66,10 @@ export const Carla = function (props) {
               ? "annotation-visible"
               : "annotation-hiden"
           }`}
-          onClick={() => console.log(".")}
+          
+          onTransitionEnd={(e) => {
+            handleTransitionEnd(e);
+          }}
         >
           <div className="annotation-inner speaking">
             <div className="carla-speaking">
@@ -85,8 +88,8 @@ export const Carla = function (props) {
         {...props}
         transform
         geometry={<planeGeometry args={[3.66, 3.47]} />}
-        position-x={props.position[0] + 1.9}
-        position-y={props.position[1] + 1.5}
+        position-x={props.position[0] + 1.2}
+        position-y={props.position[1] + 1.8}
         position-z={props.position[2] - 0.5}
         rotation={[0, -0.6, 0]}
       >
@@ -94,7 +97,10 @@ export const Carla = function (props) {
           className={`annotation ${
             props.showLoveAnnotation ? "annotation-visible" : "annotation-hiden"
           }`}
-          onClick={() => console.log(".")}
+          
+          onTransitionEnd={(e) => {
+            handleTransitionEnd(e);
+          }}
         >
           <div className="annotation-inner speaking">
             <div className="carla-speaking p-4" style={{ padding: "1em" }}>
