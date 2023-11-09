@@ -16,15 +16,15 @@ export const Automations = function (props) {
    
     >
       <div id="automations-annotation">
-        <p className="annotation-text-container thin">
+        <div className="annotation-text-container thin">
           <div>Automations.</div>
-        </p>
-        <p className="annotation-text-container bold">
+        </div>
+        <div className="annotation-text-container bold">
           <div>
             Bluedarwin Automations will extract <br />
             Information from documents using AI
           </div>
-        </p>
+        </div>
         <div className="annotation-text-container bold">
           <div>
             <ul>

@@ -64,6 +64,7 @@ export const VideoFrame = function (props) {
       </mesh>
 
       <VideoFrameAnnotation
+        // onTransitionEnd ={props.onTransitionEnd }  
         showAnnotation={props.showAnnotation}
         annotationAnchorX={annotationAnchorX}
         annotationPositionAdjustment={annotationPositionAdjustment}

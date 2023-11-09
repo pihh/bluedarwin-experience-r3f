@@ -14,7 +14,10 @@ export const VideoFrameAnnotation = function (props) {
         y: annotationAnchorX == "left"? 0 + annotationPositionAdjustment[1]: 0 + annotationPositionAdjustment[1],
         z: annotationAnchorX == "left"?  0 + annotationPositionAdjustment[2]: 0 + annotationPositionAdjustment[2],
       }
-    
+      const handleTransitionEnd = function(e){
+        e.persist();      
+        // props?.onTransitionEnd()
+      }
   return (
     <>
       <Html
@@ -29,6 +32,10 @@ export const VideoFrameAnnotation = function (props) {
         scale={[0.5, 0.5, 0.5]}
       >
         <div
+          onTransitionEnd={(e) => {
+                     
+            handleTransitionEnd(e)
+          }}
           className={`annotation ${
             showAnnotation ? "annotation-visible" : "annotation-hiden"
           }`}

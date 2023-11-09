@@ -36,15 +36,15 @@ export const Streams = function(props){
         scale={[scaleX,scaleY,scaleZ]}
       >
         <div id="streams-annotation">
-          <p className="annotation-text-container thin">
+          <div className="annotation-text-container thin">
             <div>Streams.</div>
-          </p>
-          <p className="annotation-text-container bold">
+          </div>
+          <div className="annotation-text-container bold">
             <div>
               Cognus streams is a simple drag and drop <br />
               editor where you can define the processes you want to automate
             </div>
-          </p>
+          </div>
           
             <div className="annotation-text-container bold">
               <ul>

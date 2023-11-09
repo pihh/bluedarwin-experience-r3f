@@ -13,6 +13,7 @@ export const Chatbot = function (props) {
       name={"Cognus Chatbot"}
       idx={"1"}
       src={"/textures/videos/bg.mp4"}
+      // onTransitionEnd={props.onTransitionEnd}
     >
       <div id="chatbot-annotation">
         <div className="annotation-text-container thin ">Cognus Chatbot.</div>

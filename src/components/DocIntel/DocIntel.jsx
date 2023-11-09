@@ -14,15 +14,15 @@ export const DocIntel = function (props) {
       src={"/textures/videos/streams.mp4"}
     >
       <div id="doc-intel-annotation">
-        <p className="annotation-text-container thin">
+        <div className="annotation-text-container thin">
           <div>Doc Intel.</div>
-        </p>
-        <p className="annotation-text-container bold">
+        </div>
+        <div className="annotation-text-container bold">
           <div>
             Bluedarwin Doc Intel will extract <br />
             Information from documents using AI
           </div>
-        </p>
+        </div>
         
           <div className="annotation-text-container bold">
             <ul>

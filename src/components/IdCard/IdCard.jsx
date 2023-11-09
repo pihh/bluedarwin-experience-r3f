@@ -148,7 +148,7 @@ export const IdCard = function (props) {
         </Text>
         <mesh scale={[3, 3, 3]}>
           <roundedPlaneGeometry args={[0.85, 0.54, 0.025]} />
-          <meshBasicMaterial color={"ref"} attach="material" transparent />
+          <meshBasicMaterial color={"white"} attach="material" transparent />
         </mesh>
       </group>
     </group>

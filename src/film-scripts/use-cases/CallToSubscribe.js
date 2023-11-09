@@ -3,6 +3,7 @@ const Story = [
   {
     name: "Carla states her intention of subscribing to a service",
     action: "onCarlaStateIntention",
+    description: "Opens popup then unlocks the transitioning"
   },
   { name: "Introduce Cognus Chatbot", action: "onIntroduceCognusChatbot" },
   { name: "Chatbot asks for ID", action: "onAskId" },
