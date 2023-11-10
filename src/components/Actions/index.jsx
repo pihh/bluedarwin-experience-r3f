@@ -119,8 +119,8 @@ const ActionsContainer = function(props){
 export const Actions = function (props) {
   return (
     <>
-      <ActionsContainer {...props} />
-      <FilmScriptContainer {...props} />
+      {/* <ActionsContainer {...props} />
+      <FilmScriptContainer {...props} /> */}
     </>
   );
 };

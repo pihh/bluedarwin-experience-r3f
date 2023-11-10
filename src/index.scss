@@ -113,3 +113,27 @@ button:focus-visible {
  
 }
 
+
+.bde-navigation-button{
+  background-color: transparent;
+  position: fixed;
+  top: calc( 50dvh - 3em );
+  margin-left: 1em;
+  margin-right: 1em;
+  left: 0;
+  z-index: 100000000;
+  cursor: pointer;
+ img{
+  height: 2em;
+ }
+ &.disabled {
+opacity: 0.5;
+ }
+  &.bde-navigation-button--right{
+    right: 0 !important;
+    left: auto;
+    img{
+      transform: rotate(180deg);
+    }
+  }
+} 

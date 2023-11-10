@@ -110,6 +110,17 @@ export const CallToSubscribeFilmScript = {
       },
       object: { scale: { x: 0.25, y: 0.25, z: 0.25 } },
     },
+    {
+      idx: 15,
+      name: Story[15].name,
+      description: "onNavigateToEnd",
+      camera: {
+        position: { x: 25, y: 10, z: 25 },
+        fov: 15,
+        target: { x: 25, y: 0, z: 25 },
+      },
+
+    },
   ],
   acts: Story,
 };

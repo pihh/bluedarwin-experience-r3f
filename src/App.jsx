@@ -79,8 +79,9 @@ function App() {
     useState(false);
   const [streamsAnnotationShowing, setStreamAnnotationShowing] =
     useState(false);
-  const [streamsParticlesShowing, setStreamParticlesShowing] =
-    useState(false);
+  const [streamsParticlesShowing, setStreamParticlesShowing] = useState(false);
+
+  const [act, setAct] = useState(0);
 
   // PANEL MANAGEMENT
   const onTogglePanel = function () {
@@ -225,10 +226,9 @@ function App() {
   };
 
   const onCompleteTransition = function () {
-    console.log("onCompleteTransition", transitioning);
+    // console.log("onCompleteTransition", transitioning);
 
     setTransitioning(false);
-    // debugger;
   };
 
   // STORYLINE
@@ -242,19 +242,19 @@ function App() {
   const [carlaTransitioning, setCarlaTransitioning] = useState(false);
   useEffect(() => {
     //console.log('Listening: ', {carlaTransitioning,currentSceneTransitioning});
-    onCarlaStateIntentionEnd()
-    onIntroduceCognusChatbotEnd()
+    onCarlaStateIntentionEnd();
+    onIntroduceCognusChatbotEnd();
   }, [carlaTransitioning, currentSceneTransitioning]);
 
   const onCarlaTransitionEnd = function () {
     setCarlaTransitioning(false);
   };
 
-  const onNavigateSceneEnd = function(){
-    if(!currentSceneTransitioning) return;
+  const onNavigateSceneEnd = function () {
+    if (!currentSceneTransitioning) return;
     setCurrentSceneTransitioning(false);
-    console.log('on end')
-  }
+    console.log("on end");
+  };
   const onNavigateScene = function (callback) {
     if (currentSceneTransitioning) return;
     callback();
@@ -271,12 +271,11 @@ function App() {
   const onCarlaStateIntentionEnd = function () {
     if (currentSceneTransitioning == "onCarlaStateIntention") {
       if (!carlaTransitioning) {
-        onNavigateSceneEnd()
+        onNavigateSceneEnd();
       }
     }
   };
   const onIntroduceCognusChatbot = function () {
-  
     onNavigateScene(() => {
       setCarlaTransitioning(true);
       setCarlaIntro(false);
@@ -287,7 +286,7 @@ function App() {
   const onIntroduceCognusChatbotEnd = function () {
     if (currentSceneTransitioning == "onIntroduceCognusChatbot") {
       if (!carlaTransitioning) {
-        onNavigateSceneEnd()
+        onNavigateSceneEnd();
       }
     }
   };
@@ -327,9 +326,9 @@ function App() {
 
   const onCarlaRecieveEmail = function () {
     setCarlaEmail(true);
-    wait(250,()=>{
-      onCarlaShowLove()
-    })
+    wait(250, () => {
+      onCarlaShowLove();
+    });
   };
   const onCarlaShowLove = async function () {
     //setCarlaEmail(false);
@@ -340,24 +339,55 @@ function App() {
     setStreamsActive(true);
     setStreamAnnotationShowing(true);
     // setCarlaHeart(false);
-    setStreamParticlesShowing(true)
+    setStreamParticlesShowing(true);
   };
 
   const onNavigateToEnd = function () {
-    console.log("@todo");
+    navigateToScene(7);
   };
   const onPresentProjectInfo = function () {
     console.log("@todo");
   };
 
-  useEffect(() => {}, []);
   const onSplashClose = function () {
     panelRef.current.openPanel();
+  };
+
+  const actActions = {
+    onCarlaArrive,
+    onCarlaStateIntention,
+    onIntroduceCognusChatbot,
+    onAskId,
+    onShowId,
+    onThrowId,
+    onPresentDocIntel,
+    onProcessDocument,
+    onNavigateToMeanWhile,
+    onNavigateToAutomations,
+    onNavigateToCarla,
+    onCarlaRecieveEmail,
+    onNavigateToStreamsPunchline,
+    onNavigateToStreams,
+    onPresentStreams,
+    onNavigateToEnd,
+    onPresentProjectInfo,
+  };
+  const onNextAct = () => {
+    if (act < CallToSubscribeFilmScript.acts.length - 1) {
+      setAct(act + 1);
+      actActions[CallToSubscribeFilmScript.acts[act].action]()
+    }
+  };
+  const onPrevAct = function () {
+    if (act > 0) {
+      setAct(act - 1);
+      actActions[CallToSubscribeFilmScript.acts[act].action]()
+    }
   };
   return (
     <>
       <div id="app-container">
-        {/* <Splash onSplashClose={onSplashClose}/>  */}
+        <Splash onSplashClose={onSplashClose} />
         <Panels ref={panelRef} side={panelSide}>
           <div className="text-left">
             <h1 className="bold">
@@ -439,6 +469,21 @@ function App() {
             onNavigateToStreams={onNavigateToStreams}
           />
 
+          <button
+            className="bde-navigation-button bde-navigation-button--left"
+            disabled={act == 0}
+            onClick={onPrevAct}
+          >
+            <img src="/textures/images/arrow.png" />
+          </button>
+          <button
+            className="bde-navigation-button bde-navigation-button--right"
+            disabled={act == CallToSubscribeFilmScript.acts.length - 1}
+            onClick={onNextAct}
+          >
+            <img src="/textures/images/arrow.png" />
+          </button>
+
           <Canvas
             mode={"concurrent"}
             gl={{ alpha: false }}
@@ -454,7 +499,7 @@ function App() {
               onCompleteTransition={onCompleteTransition}
             />
             <color attach="background" args={["black"]} />
-            <fog attach="fog" args={["black", 20, 40]} /> 
+            <fog attach="fog" args={["black", 20, 40]} />
             <Suspense fallback={null}>
               <group position={[0, -2, 0]}>
                 <IdCard state={idCardState} />
@@ -490,14 +535,15 @@ function App() {
               <ambientLight intensity={0.5} />
               <spotLight position={[0, 10, 0]} intensity={40} />
               <directionalLight position={[-50, 0, 40]} intensity={2} />
-               <ExperienceDebugger
+
+              {/* <ExperienceDebugger
                 config={{
                   camera: {
                     position: storyConfig.camera.position,
                     fov: storyConfig.camera.fov,
                   },
                 }}
-              /> 
+              />  */}
             </Suspense>
           </Canvas>
         </main>

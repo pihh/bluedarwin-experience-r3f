@@ -9,7 +9,7 @@ export const Automations = function (props) {
     <VideoFrame
       position={[-25, 1.8, -40]}
       rotation={[0, Math.PI / 2 - 0.9, 0]}
-       annotationPositionAdjustment={[1.2, 0, 0]}
+       annotationPositionAdjustment={[0.5, 0, 0]}
       
       showAnnotation={annotationShowing}
       name={"Bluedarwin Automations"}
@@ -18,29 +18,30 @@ export const Automations = function (props) {
    
     >
       <div id="automations-annotation">
-        <div className="annotation-text-container thin">
-          <div>Automations.</div>
-        </div>
         <div className="annotation-text-container bold">
+          <div>Bluedarwin Automations.</div>
+        </div>
+        <div className="annotation-text-container thin">
           <div>
-            Bluedarwin Automations will extract <br />
-            Information from documents using AI
+            A powerfull AI automation system that behind the scenes launched
+            a bot powered by computer vision that has 
+            already:
           </div>
         </div>
         <div className="annotation-text-container bold">
           <div>
             <ul>
-              <li>
-                <CheckIcon />
-                NIF
+              <li className="bold">
+              Logged in the system.
               </li>
-              <li>
-                <CheckIcon />
-                Age
-              </li>
-              <li>
-                <CheckIcon />
-                ID
+              <li className="bold">
+              Initialized the process of creating a new subscription for Carla
+              </li >
+              <li className="bold">
+              Inserted in the system the required data extracted from the conversation with Cognus Chatbot™ 
+              </li >
+              <li className="bold">
+              Inserted in the system the required data extracted from the ID with Doc Intel™
               </li>
             </ul>
           </div>
