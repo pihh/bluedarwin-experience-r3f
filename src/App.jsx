@@ -58,7 +58,7 @@ function App() {
   const panelRef = useRef();
 
   // STATES
-  const [panelSide, setPanelSide] = useState("right");
+  const [panelSide, setPanelSide] = useState("left");
   const [idCardState, setIdCardState] = useState("hidden");
   const [transitioning, setTransitioning] = useState(false);
   const [sceneTransitioning, setSceneTransitioning] = useState(false);
@@ -78,6 +78,8 @@ function App() {
   const [automationsAnnotationShowing, setAutomationsAnnotationShowing] =
     useState(false);
   const [streamsAnnotationShowing, setStreamAnnotationShowing] =
+    useState(false);
+  const [streamsParticlesShowing, setStreamParticlesShowing] =
     useState(false);
 
   // PANEL MANAGEMENT
@@ -194,6 +196,9 @@ function App() {
     // treamsActive(true)
     setStreamsTransitioning(true);
     navigateToScene(6);
+    // wait(2000 ,()=>{
+    //   setStreamParticlesShowing(true)
+    // })
   };
 
   const navigateToScene = function (index) {
@@ -322,16 +327,20 @@ function App() {
 
   const onCarlaRecieveEmail = function () {
     setCarlaEmail(true);
+    wait(250,()=>{
+      onCarlaShowLove()
+    })
   };
   const onCarlaShowLove = async function () {
-    setCarlaEmail(false);
-    await wait(1000);
+    //setCarlaEmail(false);
+    //await wait(1000);
     setCarlaHeart(true);
   };
   const onPresentStreams = async function () {
     setStreamsActive(true);
     setStreamAnnotationShowing(true);
-    setCarlaHeart(false);
+    // setCarlaHeart(false);
+    setStreamParticlesShowing(true)
   };
 
   const onNavigateToEnd = function () {
@@ -445,7 +454,7 @@ function App() {
               onCompleteTransition={onCompleteTransition}
             />
             <color attach="background" args={["black"]} />
-            <fog attach="fog" args={["black", 20, 50]} />
+            <fog attach="fog" args={["black", 20, 40]} /> 
             <Suspense fallback={null}>
               <group position={[0, -2, 0]}>
                 <IdCard state={idCardState} />
@@ -472,6 +481,7 @@ function App() {
                   transitioning={streamsTransitioning}
                   active={streamsActive}
                   annotationShowing={streamsAnnotationShowing}
+                  particlesShowing={streamsParticlesShowing}
                 />
 
                 <Ground />
@@ -480,14 +490,14 @@ function App() {
               <ambientLight intensity={0.5} />
               <spotLight position={[0, 10, 0]} intensity={40} />
               <directionalLight position={[-50, 0, 40]} intensity={2} />
-              {/* <ExperienceDebugger
+               <ExperienceDebugger
                 config={{
                   camera: {
                     position: storyConfig.camera.position,
                     fov: storyConfig.camera.fov,
                   },
                 }}
-              /> */}
+              /> 
             </Suspense>
           </Canvas>
         </main>

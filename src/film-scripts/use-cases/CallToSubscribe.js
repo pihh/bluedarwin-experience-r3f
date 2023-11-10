@@ -15,7 +15,7 @@ const Story = [
   { name: "Present Bluedarwind Automations", action: "onNavigateToAutomations" },
   { name: "Return to Carla", action: "onNavigateToCarla" },
   { name: "Carla recieves confirmation email.", action: "onCarlaRecieveEmail" },
-  { name: "Carla sends a heart", action: "onCarlaShowLove" },
+  // { name: "Carla sends a heart", action: "onCarlaShowLove" },
   {
     name: "Punchline - this is just a example of a real process you can automate with Bluedarwin",
     action: "onNavigateToStreamsPunchline",

@@ -1,9 +1,11 @@
 import { CheckIcon } from "../Icons/CheckIcon";
+import { Particles } from "../Particles/Particles";
 import { VideoFrame } from "../VideoFrame/VideoFrame";
 
 export const Automations = function (props) {
   const annotationShowing = props.annotationShowing;
   return (
+    <group>
     <VideoFrame
       position={[-25, 1.8, -40]}
       rotation={[0, Math.PI / 2 - 0.9, 0]}
@@ -45,5 +47,7 @@ export const Automations = function (props) {
         </div>
       </div>
     </VideoFrame>
+    <Particles position={[-10, 6, -20  ]} size={0.1} radius={12} direction={1}/>
+    </group>
   );
 };

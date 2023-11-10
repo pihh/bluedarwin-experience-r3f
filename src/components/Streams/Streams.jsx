@@ -3,10 +3,12 @@ import { VideoFrame } from "../VideoFrame/VideoFrame";
 import { useState } from "react";
 
 import lerp from "lerp";
+import { Particles } from "../Particles/Particles";
 
 {/* <group position={[0.1,25, 1]} rotation={[Math.PI/2,0,-2.14]} scale={[0.5,0.5,0.5]}> */}
 export const Streams = function(props){
     const annotationShowing = props.annotationShowing;
+    const particlesShowing = props.particlesShowing
     const isTransitioning = props.transitioning;
     const isActive = props.active;
     const [scaleX,setScaleX] = useState(1)
@@ -25,6 +27,9 @@ export const Streams = function(props){
         }
     })
     return (
+
+      <group>
+
       <VideoFrame
         position={[-0, 40, 0]}
         rotation={[Math.PI/2-0.6, 0.2, -2.14]}
@@ -34,7 +39,7 @@ export const Streams = function(props){
         idx={"4"}
         src={"/textures/videos/streams.mp4"}
         scale={[scaleX,scaleY,scaleZ]}
-      >
+        >
         <div id="streams-annotation">
           <div className="annotation-text-container thin">
             <div>Streams.</div>
@@ -58,6 +63,10 @@ export const Streams = function(props){
           
         </div>
       </VideoFrame>
+         {particlesShowing ?  <Particles />  : ""}
+        
+         <Particles />
+        </group>
     );
   };
   

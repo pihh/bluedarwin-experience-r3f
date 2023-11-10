@@ -33,7 +33,7 @@ export const Carla = function (props) {
         rotation={[0, -0.6, 0]}
       >
         <div
-          className={`annotation ${
+          className={`carla-annotation annotation ${
             props.showAnnotation ? "annotation-visible" : "annotation-hiden"
           }`}
           
@@ -55,13 +55,14 @@ export const Carla = function (props) {
         {...props}
         transform
         geometry={<planeGeometry args={[3.66, 3.47]} />}
-        position-x={props.position[0] + 3}
+        position-x={props.position[0] + 2}
         position-y={props.position[1] + 2}
-        position-z={props.position[2] - 0.5}
-        rotation={[0, 2.2, 0]}
+        position-z={props.position[2] - 0}
+        rotation={[0, 2.15, 0]}
+        scale={[0.2,0.2,0.2]}
       >
         <div
-          className={`annotation ${
+          className={`carla-annotation annotation ${
             props.showEmailAnnotation
               ? "annotation-visible"
               : "annotation-hiden"
@@ -71,7 +72,7 @@ export const Carla = function (props) {
             handleTransitionEnd(e);
           }}
         >
-          <div className="annotation-inner speaking">
+          <div className=" annotation-inner speaking">
             <div className="carla-speaking">
               <div className="mb-1">
                 <img src="/textures/images/email-icon.png" />
@@ -88,13 +89,13 @@ export const Carla = function (props) {
         {...props}
         transform
         geometry={<planeGeometry args={[3.66, 3.47]} />}
-        position-x={props.position[0] + 1.2}
-        position-y={props.position[1] + 1.8}
+        position-x={props.position[0] - 1.25}
+        position-y={props.position[1] + 2.5}
         position-z={props.position[2] - 0.5}
-        rotation={[0, -0.6, 0]}
+        rotation={[0, 2.2, 0]}
       >
         <div
-          className={`annotation ${
+          className={`carla-annotation annotation ${
             props.showLoveAnnotation ? "annotation-visible" : "annotation-hiden"
           }`}
           
